@@ -49,6 +49,7 @@ jobs:
        app_name: app_${RUNNER_OS}_ver.${GITHUB_RUN_NUMBER}
     steps:
       - uses: actions/checkout@v3
+      - uses: ilammy/msvc-dev-cmd@v1.10.0
       - name: build hello world
         run: |
             cl /EHsc main.cpp
