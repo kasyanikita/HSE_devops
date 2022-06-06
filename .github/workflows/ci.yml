@@ -58,6 +58,7 @@ jobs:
           name: my_app_windows
           path: main.exe
           retention-days: 1
+  
   error:
       name: send default message
       runs-on: ubuntu-latest
