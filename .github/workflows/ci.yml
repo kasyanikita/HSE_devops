@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+       app_name: app_ubuntu_ver.${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: build hello world
+        run: |
+          g++ main.cpp -o ${{ env.app_name }}
+          ./${{ env.app_name }}
+        
