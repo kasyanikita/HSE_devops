@@ -12,11 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-       app_name: app_ubuntu_ver.${{ github.run_number }}
+       app_name: app_${RUNNER_OS}_ver.${GITHUB_RUN_NUMBER}
     steps:
       - uses: actions/checkout@v3
       - name: build hello world
         run: |
           g++ main.cpp -o ${{ env.app_name }}
-          ./${{ env.app_name }}
+          ls -la
+          
         
