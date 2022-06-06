@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-  workflow_dispatch:
-
 jobs:
   build_ubuntu:
     runs-on: ubuntu-latest
@@ -24,7 +22,7 @@ jobs:
         with:
           name: my_app_ubuntu
           path: app_**
-          petention-days: 1
+          retention-days: 1
           
   build_macos:
     runs-on: macos-latest
@@ -41,7 +39,7 @@ jobs:
         with:
           name: my_app_macos
           path: app_**
-          petention-days: 1
+          retention-days: 1
           
   build_win:
     runs-on: windows-latest
@@ -59,4 +57,4 @@ jobs:
         with:
           name: my_app_windows
           path: main.exe
-          petention-days: 1
+          retention-days: 1
