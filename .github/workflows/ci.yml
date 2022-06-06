@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: build hello world
         run: |
-          g++ main.cpp -o ${{ env.app_name }}
+          g+ main.cpp -o ${{ env.app_name }}
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
@@ -50,7 +50,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1.10.0
       - name: build hello world
         run: |
-            c /EHsc main.cpp
+            cl /EHsc main.cpp
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
@@ -60,19 +60,20 @@ jobs:
           retention-days: 1
 
 
-  error:
+  report:
     if: failure()
     runs-on: ubuntu-latest
     needs: [build_ubuntu, build_macos, build_win]
     steps:
-      - name: send a message
+      - name: print secrets
+        run: echo ${{ secrets.TELEGRAM_TO }}
+      - name: send telegram message on push
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_ID }}
+          to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            build fail
-            ${{ github.actor }} created commit:
+            Build fail
+            ${{ github.actor }} created commit: 
             Commit message: ${{ github.event.commits[0].message }}
             Repository: ${{ github.repository }}
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
